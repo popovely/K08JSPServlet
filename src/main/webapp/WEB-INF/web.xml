@@ -20,7 +20,7 @@
      개발시에는 에러를 확인한 후 디버깅하면서 진행해야 하므로
      개발이 완료될때까지는 주석으로 처리해 두는것이 좋다
    -->
-  <error-page>
+  <!-- <error-page>
      <error-code>404</error-code>
      <location>/02ImplicitObject/Exception.jsp</location>
   </error-page>
@@ -31,7 +31,7 @@
   <error-page>
      <error-code>500</error-code>
      <location>/02ImplicitObject/Exception.jsp</location>
-  </error-page>
+  </error-page> -->
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -41,4 +41,27 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>HelloJSP.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 오라클 연결정보 컨텍스트 초기화 파라미터로 추가하기 -->
+  <context-param>
+  	<param-name>OracleDriver</param-name>
+  	<param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OracleURL</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OracleId</param-name>
+  	<param-value>musthave</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OraclePwd</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
+	  
+	<!-- 세션 유지시간 설정 : 분 단위로 설정한다. -->
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
 </web-app>

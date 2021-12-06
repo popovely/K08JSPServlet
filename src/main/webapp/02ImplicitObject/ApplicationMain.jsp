@@ -27,22 +27,22 @@
 	<h2>선언부에서 application 내장 객체 사용하기</h2>
 	<%!
 	/* 
-		선언부에서는 내장객체를 바로 사용할 수 없다.
+		선언부에서는 내장객체를 바로 사용하는건 불가능하다.
 		내장객체는 _jspService()메소드 내에서 생성된 지역변수이므로
 		더 넓은 지역인 선언부에서 사용하려면 매개변수로 전달받아야 한다.
 	*/
 	/* 
 	방법1]
-			this.getServletContext() 메소드를 통해
-			선언부에서 application 내장객체를 얻어온다.
+		this.getServletContext() 메소드를 통해
+		선언부에서 application 내장객체를 얻어온다.
 	*/
 	public String useImplicitObject(){
 		return this.getServletContext().getRealPath("/02ImplicitObject");
 	}
 	/* 
 	방법2]
-			스크립트릿에서 메소드 호출시
-			application 내장객체를 매개변수로 전달한다.
+		스크립트릿에서 메소드 호출시
+		application 내장객체를 매개변수로 전달한다.
 	*/
 	public String useImplicitObject(ServletContext app){
 		return app.getRealPath("/02ImplicitObject");
