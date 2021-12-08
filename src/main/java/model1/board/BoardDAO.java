@@ -176,4 +176,64 @@ public class BoardDAO extends JDBCConnect {
 			e.printStackTrace();
 		}
 	}
+	
+	// 게시판의 페이징 처리를 위한 메소드
+	public List<BoardDTO> selectListPage(Map<String, Object> map) {
+		List<BoardDTO> bbs = new Vector<BoardDTO>();
+		// 3개의 쿼리문을 통해 페이징 처리를 한다.
+		String query = " SELECT * FROM ( "
+					 + "	SELECT Tb.*, ROWNUM rNum FROM ( "
+					 + "		SELECT * FROM board ";
+		// 검색 조건 추가 (검색어가 있는 경우에만 where절이 추가됨)
+		if (map.get("searchWord") != null) {
+			query += " WHERE "+ map.get("searchField")
+				   + " LIKE '%"+ map.get("searchWord") +"%' ";
+		}
+		query += "		ORDER BY num DESC "
+			   + "		) Tb "
+			   + " ) "
+			   + " WHERE rNum BETWEEN ? AND ?";
+		/* JSP에서 계산된 게시물의 구간을 인파라미터로 처리함 */
+		
+		try {
+			// 쿼리 실행을 위한 prepareStatement객체 생성
+			psmt = con.prepareStatement(query);
+			// 인파라미터 설정 : 구간을 위한 start, end를 설정함
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
+			// 쿼리문 실행
+			rs = psmt.executeQuery();
+			// select한 게시물의 개수만큼 반복
+			while (rs.next()) {
+				// 한 행(게시물 하나)의 데이터를 DTO에 저장
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setId(rs.getString("id"));
+				dto.setVisitcount(rs.getString("visitcount"));
+				
+				// 반환할 결과 목록에 게시물 추가
+				bbs.add(dto);
+			}
+		}
+		catch (Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		// 목록 반환
+		return bbs;
+	}
 }
+
+
+
+
+
+
+
+
+
+
