@@ -22,7 +22,7 @@ if (sessionId.equals(dto.getId())) { //작성자 본인이 맞으면...
 	
 	//DTO객체에 일련번호를 저장한 후 DAO로 매개변수 전달
     dto.setNum(num);
-    delResult = dao.deletePost(dto);   
+    delResult = dao.deletePost(dto);
     //연결 해제
     dao.close();
 

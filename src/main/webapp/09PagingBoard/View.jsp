@@ -19,6 +19,17 @@ dao.close();
 <head>
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
+<script>
+function deletePost() {
+	var confirmed = confirm("정말로 삭제하겠습니까?");
+	if (confirmed) {
+		var form = document.writeFrm;
+		form.method = "post";
+		form.action = "DeleteProcess.jsp";
+		form.submit();
+	}
+}
+</script>
 </head>
 <body>
 <jsp:include page="../Common/Link.jsp" />
