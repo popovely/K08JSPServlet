@@ -177,6 +177,50 @@ public class BoardDAO extends JDBCConnect {
 		}
 	}
 	
+	// 게시물 수정 메소드 : 수정할 내용을 DTO객체에 저장후 매개변수로 전달한다.
+	public int updateEdit(BoardDTO dto) {
+		int result = 0;
+		
+		try {
+			// update를 위한 쿼리문
+			String query = "UPDATE board SET "
+						 + " title=?, content=? "
+						 + " WHERE num=?";
+			// prepareStatement 객체 생성
+			psmt = con.prepareStatement(query);
+			// 인파라미터 설정
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getNum());
+			// 쿼리 실행
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 게시물 삭제 메소드
+	public int deletePost(BoardDTO dto) {
+		int result = 0;
+		
+		try {
+			String query = "DELETE FROM board WHERE num=?";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getNum());
+			
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	// 게시판의 페이징 처리를 위한 메소드
 	public List<BoardDTO> selectListPage(Map<String, Object> map) {
 		List<BoardDTO> bbs = new Vector<BoardDTO>();
