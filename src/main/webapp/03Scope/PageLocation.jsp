@@ -11,10 +11,10 @@
 	<h2>이동 후 page 영역의 속성값 읽기</h2>
 	<%
 	/* 
-	아래의 출력 내용은
-	PageContextMain.jsp에서 page영역에 저장된 속성들이므로
-	이동된 현재페이지에서는 모든 데이터가 소멸되어
-	모두 null값이 출력된다.
+		아래의 출력 내용은
+		PageContextMain.jsp에서 page영역에 저장된 속성들이므로
+		이동된 현재페이지에서는 모든 데이터가 소멸되어
+		모두 null값이 출력된다.
 	*/
 	Object pInteger = pageContext.getAttribute("pageInteger");
 	Object pString = pageContext.getAttribute("pageString");

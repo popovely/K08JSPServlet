@@ -12,8 +12,8 @@
 	<h4>RequestMain.jsp 파일의 리퀘스트 영역 속성 읽기</h4>
 	<%
 	/* 
-	앞의 페이지에서 forward한 페이지이므로 request영역이 공유되어
-	아래 속성값을 문제없이 읽어올 수 있다.
+		앞의 페이지에서 forward한 페이지이므로 request영역이 공유되어
+		아래 속성값을 문제없이 읽어올 수 있다.
 	*/
 	Person pPerson = (Person)(request.getAttribute("requestPerson"));
 	%>
