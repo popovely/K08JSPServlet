@@ -1,5 +1,7 @@
 package membership;
 
+import javax.servlet.ServletContext;
+
 import common.JDBCConnect;
 /*
 DAO(Data Access Object)
@@ -11,6 +13,11 @@ public class MemberDAO extends JDBCConnect {
 	// 인자가 4개인 부모의 생성자를 호출하여 연결한다.
 	public MemberDAO(String drv, String url, String id, String pw) {
 		super(drv, url, id, pw);
+	}
+	
+	// application 내장객체만 매개변수로 받아 부모로 전달하는 생성자
+	public MemberDAO(ServletContext application) {
+		super(application);
 	}
 	
 	/*
