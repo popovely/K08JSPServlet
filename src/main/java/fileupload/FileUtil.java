@@ -88,4 +88,16 @@ public class FileUtil {
     		e.printStackTrace();
     	}
     }
+    
+    // 서버에 저장된 파일 존재여부 확인후 삭제처리
+    public static void deleteFile(HttpServletRequest req,
+    		String directory, String filename) {
+    	// 물리적 경로 가져오기
+    	String sDirectory =req.getServletContext().getRealPath(directory);
+    	// 파일객체 생성
+    	File file = new File(sDirectory + File.separator + filename);
+    	if (file.exists()) {// 파일이 있으면...
+    		file.delete();// 삭제
+    	}
+    }
 }

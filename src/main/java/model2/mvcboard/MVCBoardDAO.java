@@ -210,4 +210,36 @@ public class MVCBoardDAO extends DBConnPool {
  		}
  		return result;
  	}
+ 	// 일련번호와 패스워드가 일치할때만 게시물 업데이트(수정) 처리
+ 	public int updatePost(MVCBoardDTO dto) {
+ 		int result = 0;
+ 		
+ 		try {
+ 			// update를 위한 쿼리문
+ 			String query = "UPDATE mvcboard "
+ 						 + " SET title=?, name=?, content=?, ofile=?, sfile=? "
+ 						 + " WHERE idx=? and pass=?";
+ 			
+ 			// prepareStatement 객체 생성
+ 			psmt = con.prepareStatement(query);
+ 			// 인파라미터 설정
+ 			psmt.setString(1, dto.getTitle());
+ 			psmt.setString(2, dto.getName());
+ 			psmt.setString(3, dto.getContent());
+ 			psmt.setString(4, dto.getOfile());
+ 			psmt.setString(5, dto.getSfile());
+ 			psmt.setString(6, dto.getIdx());
+ 			psmt.setString(7, dto.getPass());
+ 			
+ 			System.out.println(dto.getPass());
+ 			
+ 			// 쿼리 실행
+ 			result = psmt.executeUpdate();
+ 		}
+ 		catch (Exception e) {
+ 			System.out.println("게시물 수정 중 예외 발생");
+ 			e.printStackTrace();
+ 		}
+ 		return result;
+ 	}
 }

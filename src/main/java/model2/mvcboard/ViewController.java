@@ -39,6 +39,6 @@ public class ViewController extends HttpServlet {
 		// request영역에 DTO객체를 저장한다.
 		req.setAttribute("dto", dto);
 		// View로 forward한다.
-		req.getRequestDispatcher("/14MVCboard/View.jsp").forward(req, resp);
+		req.getRequestDispatcher("/14MVCBoard/View.jsp").forward(req, resp);
 	}
 }
